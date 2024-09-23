@@ -26,7 +26,7 @@ def main():
 
         SURFACE.fill((255, 255, 255))
         if len(mousepos) > 1:
-            pygame.draw.line(SURFACE, (255, 0, 0), False, mousepos)
+            pygame.draw.lines(SURFACE, (255, 0, 0), False, mousepos)
 
         pygame.display.update()
         FPSCLOCK.tick(10)
