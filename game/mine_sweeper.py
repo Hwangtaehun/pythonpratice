@@ -67,7 +67,7 @@ def main():
                 pygame.quit()
                 sys.exit()
 
-            if  event.type == MOUSEBUTTONDOWN and event.button == 1:
+            if event.type == MOUSEBUTTONDOWN and event.button == 1:
                 xpos, ypos = floor(event.pos[0] / SIZE), floor(event.pos[1] / SIZE)
 
                 if field[ypos][xpos] == BOMB:
