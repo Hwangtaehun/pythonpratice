@@ -41,8 +41,8 @@ def main():
             test = edge.move(0, slope)
             if test.top <= 0 or test.bottom >= 600:
                 slope = randint(1, 6) * (-1 if slope > 0 else 1)
-                edge.inflate_ip(0, 20)
-            edge.move_ip(10,slope)
+                edge.inflate_ip(0, -20)
+            edge.move_ip(10, slope)
             holes.append(edge)
             del holes[0]
             holes = [x.move(-10, 0) for x in holes]
