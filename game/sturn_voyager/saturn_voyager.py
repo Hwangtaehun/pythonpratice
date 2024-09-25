@@ -19,13 +19,13 @@ def main():
 
     scorefont = pygame.font.SysFont(None, 36)
     sysfont = pygame.font.SysFont(None, 72)
-    message_over = sysfont.render("GAME OVER!!", True, (0, 255, 255))
+    message_over = sysfont.render("GAME OVER!!", True, (0, 255, 225))
     message_rect = message_over.get_rect()
     message_rect.center = (400, 400)
 
     while len(stars) < 200:
         stars.append({
-            "pos": {randint(-1600, 1600), randint(-1600, 1600), randint(0, 4095)},
+            "pos": [randint(-1600, 1600), randint(-1600, 1600), randint(0, 4095)],
             "theta": randint(0, 360)
         })
 
@@ -53,7 +53,7 @@ def main():
                 ship[1] -= 30
             elif K_DOWN in keymap:
                 ship[1] += 30
-            
+
             ship[0] = max(-800, min(800, ship[0]))
             ship[1] = max(-800, min(800, ship[1]))
 
