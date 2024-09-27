@@ -30,7 +30,7 @@ class Rock(Drawable):
         self.power = 128 / size
         self.step[0] = cos(radians(self.theta)) * self.power
         self.step[1] = sin(radians(self.theta)) * -self.power
-    
+
     def draw(self):
         rotated = pygame.transform.rotozoom(self.image, self.theta, self.size / 64)
         rect = rotated.get_rect()
@@ -50,8 +50,8 @@ class Shot(Drawable):
 
     def draw(self):
         if self.count < self.max_count:
-            pygame.draw.rect(SURFACE, (255, 255, 0), self.rect)
-        
+            pygame.draw.rect(SURFACE, (225, 225, 0), self.rect)
+
     def tick(self):
         self.count += 1
         self.move()
@@ -71,14 +71,13 @@ class Ship(Drawable):
         rect = rotated.get_rect()
         rect.center = self.rect.center
         SURFACE.blit(rotated, rect)
-        
         if self.explode:
             SURFACE.blit(self.bang, rect)
-    
+
     def tick(self):
         self.power += self.accel
-        self.power += 0.94
-        self.accel += 0.94
+        self.power *= 0.94
+        self.accel *= 0.94
         self.step[0] = cos(radians(self.theta)) * self.power
         self.step[1] = sin(radians(self.theta)) * -self.power
         self.move()
@@ -87,7 +86,7 @@ class Ship(Drawable):
 def key_event_handler(keymap, ship):
     for event in pygame.event.get():
         if event.type == QUIT:
-            pygame.init()
+            pygame.quit()
             sys.exit()
         elif event.type == KEYDOWN:
             if not event.key in keymap:
@@ -107,8 +106,8 @@ def key_event_handler(keymap, ship):
 def main():
     sysfont = pygame.font.SysFont(None, 72)
     scorefont = pygame.font.SysFont(None, 36)
-    message_clear = sysfont.render("!!CLEARED!!", True, (0, 255, 255))
-    message_over = sysfont.render("GAME OVER!!", True, (0, 255, 255))
+    message_clear = sysfont.render("!!CLEARED!!", True, (0, 255, 225))
+    message_over = sysfont.render("GAME OVER!!", True, (0, 255, 225))
     message_rect = message_clear.get_rect()
     message_rect.center = (400, 400)
 
@@ -128,7 +127,6 @@ def main():
     while len(rocks) < 4:
         pos = randint(0, 800), randint(0, 800)
         rock = Rock(pos, 64)
-
         if not rock.rect.colliderect(ship.rect):
             rocks.append(rock)
 
@@ -148,21 +146,18 @@ def main():
             for shot in shots:
                 if shot.count < shot.max_count:
                     shot.tick()
-                    
+
                     hit = None
                     for rock in rocks:
                         if rock.rect.colliderect(shot.rect):
                             hit = rock
-                    
                     if hit != None:
                         score += hit.rect.width * 10
                         shot.count = shot.max_count
                         rocks.remove(hit)
-                        
                         if hit.rect.width > 16:
                             rocks.append(Rock(hit.rect.center, hit.rect.width / 2))
                             rocks.append(Rock(hit.rect.center, hit.rect.width / 2))
-
                         if len(rocks) == 0:
                             game_over = True
 
