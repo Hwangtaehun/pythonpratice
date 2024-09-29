@@ -4,6 +4,10 @@ from math import hypot
 import pygame
 from pygame.locals import Rect, QUIT, MOUSEMOTION, MOUSEBUTTONDOWN
 
+pygame.init()
+SURFACE = pygame.display.set_mode([800, 600])
+FPSCLOCK = pygame.time.Clock()
+
 class House:
     def __init__(self, xpos):
         self.rect = Rect(xpos, 550, 40, 40)
@@ -117,10 +121,6 @@ class Shoot:
 
         elif self.radius > 0:
             pygame.draw.circle(SURFACE, (0, 255, 0), self.shot_pos, self.radius)
-
-pygame.init()
-SURFACE = pygame.display.set_mode([800, 600])
-FPSCLOCK = pygame.time.Clock()
 
 def main():
     game_over = False
