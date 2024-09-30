@@ -13,6 +13,7 @@ class Drawable:
         strip = pygame.image.load("strip.png")
         self.images = (pygame.Surface((24, 24), pygame.SRCALPHA), pygame.Surface((24, 24), pygame.SRCALPHA))
         self.rect = rect
+        self.count = 0
         self.images[0].blit(strip, (0, 0), Rect(offset0, 0, 24, 24))
         self.images[1].blit(strip, (0, 0), Rect(offset1, 0, 24, 24))
 
@@ -141,29 +142,29 @@ def main():
                 if len(aliens) == 0:
                     game_over = True
 
-                SURFACE.fill((0, 0, 0))
+            SURFACE.fill((0, 0, 0))
 
-                for alien in aliens:
-                    alien.draw()
+            for alien in aliens:
+                alien.draw()
 
-                ship.draw()
-                beam.draw()
+            ship.draw()
+            beam.draw()
                 
-                for bomb in bombs:
-                    bomb.draw()
+            for bomb in bombs:
+                bomb.draw()
 
-                score_str = str(score).zfill(5)
-                score_image = scorefont.render(score_str, True, (0, 255, 0))
-                SURFACE.blit(score_image, (500, 10))
+            score_str = str(score).zfill(5)
+            score_image = scorefont.render(score_str, True, (0, 255, 0))
+            SURFACE.blit(score_image, (500, 10))
 
-                if game_over:
-                    if len(aliens) == 0:
-                        SURFACE.blit(message_clear, message_rect.topleft)
-                    else:
-                        SURFACE.blit(message_over, message_rect.topleft)
+            if game_over:
+                if len(aliens) == 0:
+                    SURFACE.blit(message_clear, message_rect.topleft)
+                else:
+                    SURFACE.blit(message_over, message_rect.topleft)
 
-                pygame.display.update()
-                FPSCLOCK.tick(20)
+            pygame.display.update()
+            FPSCLOCK.tick(20)
 
 if __name__ == '__main__':
     main()
