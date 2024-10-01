@@ -101,7 +101,7 @@ def erase_line():
     ypos = 20
 
     while ypos >= 0:
-        if all(FIELD(ypos)):
+        if all(FIELD[ypos]):
             erased += 1
             del FIELD[ypos]
             FIELD.insert(0, [8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8])
@@ -189,7 +189,7 @@ def main():
 
             if not is_overlapped(next_x, next_y, next_t):
                 BLOCK.xpos = next_x
-                Block.ypos = next_y
+                BLOCK.ypos = next_y
                 BLOCK.turn = next_t
                 BLOCK.data = BLOCK.type[BLOCK.turn]
 
